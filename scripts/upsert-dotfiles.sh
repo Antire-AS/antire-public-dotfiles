@@ -11,7 +11,7 @@ INCLUDE_ITEMS=(
 tmp=$(mktemp -d)
 overwrite_all=false
 
-git clone --depth=1 "$REPO_URL" "$tmp"
+git clone --depth=1 --branch "feat/adding-pyright" "$REPO_URL" "$tmp"
 
 shopt -s nullglob
 
