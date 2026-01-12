@@ -1,0 +1,22 @@
+{
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "**/__pycache__",
+    "**/node_modules"
+  ],
+  "reportIncompatibleMethodOverride": "error",
+  "reportIncompatibleVariableOverride": "error",
+  "reportInconsistentConstructor": "error",
+  "reportGeneralTypeIssues": "warning",
+  "reportOptionalMemberAccess": "warning",
+  "reportOptionalSubscript": "warning",
+  "reportPrivateUsage": "warning",
+  "reportUnusedImport": "information",
+  "reportUnusedVariable": "information",
+  "typeCheckingMode": "standard",
+  "pythonVersion": "3.14",
+  "venvPath": ".",
+  "venv": ".venv"
+}
