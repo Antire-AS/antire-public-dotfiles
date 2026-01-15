@@ -1,6 +1,5 @@
 {
   "branches": ["main"],
-  "initialRelease": "0.1.0",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -102,8 +101,8 @@
     [
       "@semantic-release/github",
       {
-        "successComment": false,
-        "failComment": false
+        "successCommentCondition": "false",
+        "failCommentCondition": "false"
       }
     ]
   ]
