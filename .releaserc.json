@@ -99,11 +99,7 @@
       }
     ],
     [
-      "@semantic-release/github",
-      {
-        "successCommentCondition": "false",
-        "failCommentCondition": "false"
-      }
+      "@semantic-release/github"
     ]
   ]
 }
