@@ -1,84 +1,105 @@
 {
   "branches": ["main"],
   "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
     [
-      "@semantic-release/github",
+      "@semantic-release/commit-analyzer",
       {
-        "successComment": false,
-        "failComment": false
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features",
+              "hidden": false
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes",
+              "hidden": false
+            },
+            {
+              "type": "perf",
+              "section": "Performance",
+              "hidden": false
+            },
+            {
+              "type": "revert",
+              "section": "Reverts",
+              "hidden": true
+            },
+            {
+              "type": "docs",
+              "hidden": true
+            },
+            {
+              "type": "style",
+              "hidden": true
+            },
+            {
+              "type": "refactor",
+              "hidden": true
+            },
+            {
+              "type": "test",
+              "hidden": true
+            },
+            {
+              "type": "chore",
+              "hidden": true
+            }
+          ]
+        },
+        "releaseRules": [
+          {
+            "breaking": true,
+            "release": "major"
+          },
+          {
+            "type": "feat",
+            "release": "minor"
+          },
+          {
+            "type": "fix",
+            "release": "patch"
+          },
+          {
+            "type": "perf",
+            "release": "patch"
+          },
+          {
+            "type": "revert",
+            "release": "patch"
+          }
+        ]
       }
-    ]
-  ],
-  "preset": "conventionalcommits",
-  "presetConfig": {
-    "types": [
+    ],
+    [
+      "@semantic-release/release-notes-generator",
       {
-        "type": "feat",
-        "section": "Features",
-        "hidden": false
-      },
-      {
-        "type": "fix",
-        "section": "Bug Fixes",
-        "hidden": false
-      },
-      {
-        "type": "perf",
-        "section": "Performance",
-        "hidden": false
-      },
-      {
-        "type": "revert",
-        "section": "Reverts",
-        "hidden": true
-      },
-      {
-        "type": "docs",
-        "hidden": true
-      },
-      {
-        "type": "style",
-        "hidden": true
-      },
-      {
-        "type": "refactor",
-        "hidden": true
-      },
-      {
-        "type": "test",
-        "hidden": true
-      },
-      {
-        "type": "chore",
-        "hidden": true
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features",
+              "hidden": false
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes",
+              "hidden": false
+            },
+            {
+              "type": "perf",
+              "section": "Performance",
+              "hidden": false
+            }
+          ]
+        }
       }
+    ],
+    [
+      "@semantic-release/github"
     ]
-  },
-  "releaseRules": [
-    {
-      "type": "feat",
-      "release": "minor"
-    },
-    {
-      "type": "fix",
-      "release": "patch"
-    },
-    {
-      "type": "perf",
-      "release": "patch"
-    },
-    {
-      "breaking": true,
-      "release": "major"
-    },
-    {
-      "revert": true,
-      "release": "patch"
-    },
-    {
-      "release": "minor"
-    }
   ]
 }
