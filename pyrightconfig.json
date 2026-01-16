@@ -4,7 +4,8 @@
   ],
   "exclude": [
     "**/__pycache__",
-    "**/node_modules"
+    "**/node_modules",
+    "**/.venv"
   ],
   "reportIncompatibleMethodOverride": "error",
   "reportIncompatibleVariableOverride": "error",
