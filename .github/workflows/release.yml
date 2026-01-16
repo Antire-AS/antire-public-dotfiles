@@ -2,8 +2,7 @@ name: Semantic Release
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 permissions:
   contents: write
@@ -14,21 +13,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: Antire-AS/antire-reusable-actions/.github/actions/reusable-release@v0.12.0
         with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install semantic-release
-        run: npm install -g semantic-release @semantic-release/github @semantic-release/changelog @semantic-release/git conventional-changelog-conventionalcommits
-
-      - name: Run semantic-release
+          repository: ${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: semantic-release
 
