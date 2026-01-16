@@ -17,7 +17,6 @@
   "reportUnusedImport": "information",
   "reportUnusedVariable": "information",
   "typeCheckingMode": "standard",
-  "pythonVersion": "3.14",
   "venvPath": ".",
   "venv": ".venv"
 }
