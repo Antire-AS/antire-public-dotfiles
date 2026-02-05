@@ -17,7 +17,7 @@
 - **Strictly typed** - all functions, parameters, and return values must have type hints
 - **Avoid `dict`** - use dataclasses or typed classes instead
 - **Avoid `None`** - use `Optional` only when absolutely necessary; prefer sentinel values or result types
-- **Avoid `Union`** - suggest refactorings instead of loosing type clarity
+- **Avoid `Union`** - prefer refactoring to polymorphic types or separate functions instead of losing type clarity
 - **No comments in code** - code should be self-documenting through clear naming and types
 
 ## Dataclasses
