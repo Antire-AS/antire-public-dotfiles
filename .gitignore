@@ -1,2 +1,197 @@
-.vscode/*
-.idea/*
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment files (real env files ignored, templates kept)
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+pytestdebug.log
+
+# Type checkers
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# Linters
+.ruff_cache/
+
+# UV package manager
+.uv/
+uv_cache/
+uv.lock
+
+# Documentation generators
+/site
+docs/_build/
+
+# Translations
+*.mo
+*.pot
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+.spyderproject
+.spyproject
+.ropeproject
+
+# OS files - macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# OS files - Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+*:Zone.Identifier
+
+# OS files - Linux
+.directory
+.Trash-*
+.nfs*
+.fuse_hidden*
+
+# Secrets
+*.pem
+*.key
+secrets/
+.secrets
+
+# Logs
+*.log
+logs/
+
+# Databases (local dev)
+*.db
+*.sqlite
+*.sqlite3
+
+# Caches
+cache/
+.cache/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+
+# Docker
+.docker/
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# FastAPI
+instance/
+uploads/
+static/uploads/
+*.db-journal
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Output directories
+output/
+tmp/
+temp/
