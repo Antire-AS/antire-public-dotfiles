@@ -8,6 +8,7 @@ INCLUDE_ITEMS=(
   "pyrightconfig.json"
   "pytest.ini"
   ".coveragerc"
+  "claude.md"
 )
 
 tmp=$(mktemp -d)
