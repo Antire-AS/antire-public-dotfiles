@@ -28,71 +28,72 @@
 
 - Use **punq** for dependency injection with auto-wiring
 - **Never use manual dependency injection** - always use the container
-- **All configuration must use typed config objects** - never primitives in constructors
-- Create frozen dataclasses for configuration (e.g., `GithubConfig`, `DatabaseConfig`)
-- All environment variable logic and file reading happens in `main.py`, to be parsed into config structures,not in
-  adapters or factories
-- Config objects must have **explicit required values** - no `None` defaults for required config
 
-### Container Setup Pattern
+### Dependency Injection Rules
 
-Follow this pattern for all DI setup:
+1. **Config objects are frozen dataclasses** - must be explicit, no hidden fallbacks, never primitives in constructors
+2. **Factory methods are class methods** - not lambdas or nested functions
+3. **Use context manager for lifecycle** - automatic resource cleanup
+4. **Type annotations on resolve** - use `# type: ignore[assignment]` for punq's dynamic resolution
+5. **Register in order**: configs → infrastructure → ports/adapters → use cases → app
+6. **Auto-wiring requirement**: Constructor parameters must be unambiguous types (no multiple `str` params)
+
+### ContainerFactory Pattern
+
+Create a ContainerFactory class as a context manager:
 
 ```python
-# 1. Create a ContainerFactory class as a context manager
 class ContainerFactory:
     def __init__(self, config1: Config1, config2: Config2):
         self.config1 = config1
         self.config2 = config2
         self.container = punq.Container()
-        self.session: Session | None = None  # Track resources needing cleanup
+        self.session: Session | None = None
 
     def create_infrastructure_dependency(self) -> InfrastructureType:
-        # Factory methods as proper class methods, not lambdas
         return InfrastructureType(self.config1.param)
 
     def build(self) -> punq.Container:
-        # Register configs as instances
         self.container.register(Config1, instance=self.config1)
         self.container.register(Config2, instance=self.config2)
-
-        # Register infrastructure with factory methods
         self.container.register(InfrastructureType, factory=self.create_infrastructure_dependency)
-
-        # Register ports -> adapters (auto-wired)
-        self.container.register(PortInterface, AdapterImplementation)
-
-        # Register use cases (auto-wired)
+        self.container.register(PortABC, AdapterImplementation)
         self.container.register(UseCase)
-
         return self.container
 
     def __enter__(self) -> punq.Container:
         return self.build()
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-        # Clean up resources (e.g., close database sessions)
         if self.session:
             self.session.close()
+```
 
+### Environment Variable Handling in main.py
 
-# 2. In main.py, handle all environment variables and config creation
+All environment variable logic and file reading happens in `main.py`, never in adapters or factories.
+
+```python
 def get_required_env(env_var_name: str) -> str:
-    """Get required environment variable or raise exception with clear message"""
     value = os.getenv(env_var_name)
     if value is None or value == "":
         raise Exception(f"{env_var_name} environment variable not set")
     return value
 
 def get_optional_env(env_var_name: str, fallback: str) -> str:
-    """Get optional environment variable with fallback for local dev"""
     return os.getenv(env_var_name, fallback)
+```
 
+Rules:
+- **Required config (API keys, secrets)** - use `get_required_env()`, throws exception if missing
+- **Optional config (has sane defaults)** - use `get_optional_env()` with fallback for local dev
+- **Never put fallbacks on API keys or secrets** - must fail fast with clear error message
+
+### Main Entry Point Pattern
+
+```python
 def main():
-    # Required config (API keys, secrets) - throws exception if missing
     api_key = get_required_env("API_KEY")
-
-    # Optional config (has sane defaults) - uses fallback
     database_url = get_optional_env("DATABASE_URL", "postgresql://localhost/dev")
 
     config1 = Config1(api_key=api_key)
@@ -102,22 +103,6 @@ def main():
         app: AppType = container.resolve(AppType)  # type: ignore[assignment]
         app.run()
 ```
-
-### Dependency Injection Rules
-
-1. **Config objects are frozen dataclasses** - must be explicit, no hidden fallbacks
-2. **Factory methods are class methods** - not lambdas or nested functions
-3. **Use context manager for lifecycle** - automatic resource cleanup
-4. **Type annotations on resolve** - use `# type: ignore[assignment]` for punq's dynamic resolution
-5. **Register in order**: configs → infrastructure → ports/adapters → use cases → app
-6. **Auto-wiring requirement**: Constructor parameters must be unambiguous types (no multiple `str` params)
-
-### Environment Variable Handling
-
-- **Required config (API keys, secrets)** - use `get_required_env()` which throws exception if missing
-- **Optional config (has sane defaults)** - use `get_optional_env()` with fallback for local dev
-- **Never put fallbacks on API keys or secrets** - must fail fast with clear error message
-- All environment variable functions live in `main.py`, never in adapters or domain
 
 ## Type Safety
 
