@@ -1,0 +1,18 @@
+{
+  "ignore": [
+    "**/.venv/**",
+    "**/__pycache__/**",
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/.mypy_cache/**",
+    "**/.pytest_cache/**",
+    "**/.ruff_cache/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/*.egg-info/**",
+    "**/htmlcov/**",
+    "**/.idea/**",
+    "**/.vscode/**",
+    "**/.DS_Store"
+  ]
+}
