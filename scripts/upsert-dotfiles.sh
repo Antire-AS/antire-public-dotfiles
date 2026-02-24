@@ -9,6 +9,7 @@ INCLUDE_ITEMS=(
   "pytest.ini"
   ".coveragerc"
   "claude.md"
+  ".jscpd.json"
 )
 
 tmp=$(mktemp -d)
