@@ -21,8 +21,8 @@ venv.bak/
 !.env.template
 !.env.sample
 
-# Personal config overlays (antire_python_modules ConfigResolver: config/<env>.local.yml)
-config/*.local.yml
+# Personal config overlays (antire_python_modules ConfigResolver: config/<env>.local.yml, at any depth)
+**/config/*.local.y*ml
 
 # Distribution / packaging
 .Python
@@ -152,7 +152,7 @@ secrets/
 
 # Logs
 *.log
-*.log.*
+*.log.[0-9]*
 logs/
 
 # Databases (local dev)
@@ -190,7 +190,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 *.tfplan
-tfplan
 *.secrets.tfvars
 secrets.auto.tfvars
 
