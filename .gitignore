@@ -21,6 +21,9 @@ venv.bak/
 !.env.template
 !.env.sample
 
+# Personal config overlays (antire_python_modules ConfigResolver: config/<env>.local.yml)
+config/*.local.yml
+
 # Distribution / packaging
 .Python
 build/
@@ -149,12 +152,17 @@ secrets/
 
 # Logs
 *.log
+*.log.*
 logs/
 
 # Databases (local dev)
 *.db
 *.sqlite
 *.sqlite3
+*.db-shm
+*.db-wal
+*.duckdb
+*.duckdb.wal
 
 # Caches
 cache/
@@ -181,6 +189,10 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
+*.tfplan
+tfplan
+*.secrets.tfvars
+secrets.auto.tfvars
 
 # FastAPI
 instance/
@@ -195,3 +207,23 @@ static/uploads/
 output/
 tmp/
 temp/
+
+# JavaScript tooling
+node_modules/
+
+# Azure Functions local settings (hold secrets) and the Azurite storage emulator
+local.settings.json
+__blobstorage__/
+__queuestorage__/
+__azurite_db_*__.json
+
+# Claude Code per-user state
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+
+# Git worktrees kept inside the repo
+.worktrees/
+
+# Office lock files
+~$*
